@@ -28,7 +28,7 @@ export default class AccountReader {
     const account = await AccountReader.getAccountByUsername(params.username);
     const isPasswordValid = await AccountUtil.comparePassword(
       params.password,
-      account.hashedPassword,
+      account.password, // Use the 'password' field from the updated schema
     );
     if (!isPasswordValid) {
       throw new InvalidCredentialsError(params.username);

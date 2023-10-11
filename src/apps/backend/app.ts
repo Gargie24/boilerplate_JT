@@ -13,7 +13,7 @@ import ConfigService from './modules/config/config-service';
 import Logger from './modules/logger/logger';
 import LoggerManager from './modules/logger/logger-manager';
 import TaskServiceManager from './modules/task/task-service-manager';
-
+import TodoServiceManager from './modules/todo/todo-service-manager';
 const isDevEnv = process.env.NODE_ENV === 'development';
 
 export default class App {
@@ -45,7 +45,7 @@ export default class App {
 
   private static async createRESTApiServer(): Promise<Application> {
     const app: Application = express();
-
+    Logger.info(`http server started listening on port for rest api web  application`);
     // if running server in development mode, allow cross-origin calls
     // from webpack dev server
     if (isDevEnv) {
@@ -63,6 +63,12 @@ export default class App {
 
     const taskServiceRESTApi = await TaskServiceManager.createRestAPIServer();
     app.use('/', taskServiceRESTApi);
+
+    //todo api
+
+    const todoServiceRESTApi = await TodoServiceManager.createRestAPIServer();
+    app.use('/', todoServiceRESTApi);
+
 
     return app;
   }

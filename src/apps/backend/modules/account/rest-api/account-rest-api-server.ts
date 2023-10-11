@@ -8,16 +8,26 @@ import AccountRouter from './account-router';
 
 export default class AccountRESTApiServer {
   public static async create(): Promise<Application> {
-    await AccountRepository.createDBConnection();
+    try {
+      console.log('[INFO] Creating Express Application...');
 
-    const app = express();
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+      await AccountRepository.createDBConnection();
+      console.log('[INFO] .....MongoDB connected successfully.');
 
-    app.use('/accounts', AccountRouter.getRoutes());
+      const app = express();
+      app.use(bodyParser.urlencoded({ extended: true }));
+      app.use(bodyParser.json());
 
-    app.use(ErrorHandler.AppErrorHandler);
+      app.use('/', AccountRouter.getRoutes());
+      
+      app.use(ErrorHandler.AppErrorHandler);
 
-    return Promise.resolve(app);
+      console.log('[INFO] Express Application created successfully.');
+
+      return Promise.resolve(app);
+    } catch (error) {
+      console.error('[ERROR] An error occurred during server creation:', error);
+      throw error;
+    }
   }
 }

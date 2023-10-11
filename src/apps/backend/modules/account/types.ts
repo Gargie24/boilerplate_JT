@@ -6,13 +6,27 @@ export class Account {
 
   username: string;
 
-  hashedPassword: string;
+  password: string;
+
+  email : String;
+
+  name: String;
+  todos: String;
+
 }
 
-export type CreateAccountParams = {
+// types.ts
+
+export interface CreateAccountParams {
   username: string;
   password: string;
-};
+  email: string;
+  name: string;
+
+}
+
+
+// ...
 
 export type AccountSearchParams = {
   username: string;

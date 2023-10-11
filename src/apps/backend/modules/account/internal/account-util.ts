@@ -9,7 +9,8 @@ export default class AccountUtil {
     const account = new Account();
     account.id = accountDb._id.toString();
     account.username = accountDb.username;
-    account.hashedPassword = accountDb.hashedPassword;
+    account.password = accountDb.password;
+    account.email = accountDb.email;
     return account;
   }
 
@@ -24,3 +25,4 @@ export default class AccountUtil {
     return bcrypt.compare(password, hashedPassword);
   }
 }
+

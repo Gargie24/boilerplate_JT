@@ -28,8 +28,10 @@ export default function App(): React.ReactElement {
           <Header />
           <Routes>
             <Route path='/about' element={<About />} />
+
             <Route path='/' element={<Login />} />
             <Route path='*' element={<NotFound />} />
+
           </Routes>
           <Footer />
         </div>
