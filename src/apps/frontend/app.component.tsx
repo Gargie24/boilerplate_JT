@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
-import { Header, Footer } from './components';
+import { Footer,Header } from './components';
 import { DepsProvider } from './contexts';
 import { Config } from './helpers';
-import { About, Login, NotFound } from './pages';
+import { About,Login,Register,Home} from './pages';
 import { AccessService } from './services';
 import InspectLet from './vendor/inspectlet';
 
@@ -24,13 +24,16 @@ export default function App(): React.ReactElement {
       accessService: new AccessService(),
     }}>
       <Router>
+      <Header/>
         <div className='container'>
-          <Header />
+
           <Routes>
+            <Route path = '/' element={<div style={{ marginTop: '40px' }}><Home /></div>}> </Route>
             <Route path='/about' element={<About />} />
 
-            <Route path='/' element={<Login />} />
-            <Route path='*' element={<NotFound />} />
+             <Route path='/login' element={<Login />} />
+            {/* <Route path='*' element={<NotFound />} /> */}
+            <Route path='/register' element={<Register/>} />
 
           </Routes>
           <Footer />
@@ -39,3 +42,8 @@ export default function App(): React.ReactElement {
     </DepsProvider>
   );
 }
+
+
+
+
+

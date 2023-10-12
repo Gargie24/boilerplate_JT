@@ -35,7 +35,7 @@ export default class TodoWriter {
       {
         _id: params.todoId,
         account: params.accountId,
-       
+        active: true,
       },
       {
         $set: {

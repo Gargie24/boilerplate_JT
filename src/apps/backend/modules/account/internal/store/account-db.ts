@@ -22,7 +22,7 @@ export const accountDbSchema: Schema = new Schema<AccountDB>(
     },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    todos: [{ type: Types.ObjectId, ref: 'Todo' }], // Assuming 'Todo' is the model name for todos
+    // todos: [{ type: Types.ObjectId, ref: 'Todo' }], // Assuming 'Todo' is the model name for todos
   },
   {
     timestamps: {

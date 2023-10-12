@@ -1,0 +1,54 @@
+/* Style the registration form container */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Style the form fields and labels */
+  .input-container {
+    margin-bottom: 10px; /* Add margin for spacing between fields */
+  }
+
+  /* Style the input fields */
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px; /* Add margin at the top of each input */
+  }
+
+  /* Style the error messages */
+  .error-message {
+    color: red;
+    font-size: 14px;
+  }
+
+  /* Style the Register button */
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  /* Style success and error messages */
+  #success {
+    color: green;
+    text-align: center;
+  }
+
+  #error {
+    color: red;
+    text-align: center;
+  }

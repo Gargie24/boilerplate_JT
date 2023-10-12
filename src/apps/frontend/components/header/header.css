@@ -1,0 +1,65 @@
+/* Reset some default browser styles */
+body,
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* Style the navbar */
+nav {
+  background-color: #3090a3;
+  color: #fff;
+  margin-top: 5px;
+  width: vmax;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.brand a {
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-buttons a {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Style the links on hover */
+.nav-buttons a:hover {
+  text-decoration: underline;
+}
+
+/* Style the "Logout" button differently */
+.nav-buttons a.logout {
+  background-color: #ff0000; /* Red color */
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Center the "Logout" button */
+.nav-buttons a.logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+}
+
+/* Style the "Logout" button on hover */
+.nav-buttons a.logout:hover {
+  background-color: #cc0000; /* Slightly lighter red on hover */
+}
