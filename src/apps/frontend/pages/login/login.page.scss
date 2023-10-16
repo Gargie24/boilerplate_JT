@@ -1,0 +1,57 @@
+/* login.page.scss */
+
+/* Center the login box */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  /* Heading styles */
+  h2 {
+    margin: 10px 0; /* Add margin above and below the heading */
+    text-align: center; /* Center the text within the heading */
+  }
+
+  /* Input group styles */
+  .input-group {
+    margin: 10px 0; /* Add margin above and below the input group */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the input elements within the group */
+  }
+
+  /* Label styles */
+  label {
+    margin-bottom: 5px; /* Add margin below the label */
+  }
+
+  /* Input field styles */
+  input {
+    padding: 5px;
+    width: 100%;
+    margin: 5px 0; /* Add margin above and below the input field */
+  }
+
+  /* Button style */
+  button {
+    margin: 10px 0; /* Add margin above and below the button */
+    background-color: #3498db; /* Example background color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Success and Error styles */
+  #success {
+    color: #2ecc71; /* Green color for success message */
+    text-align: center; /* Center the success message */
+  }
+
+  #error {
+    color: #e74c3c; /* Red color for error message */
+    text-align: center; /* Center the error message */
+  }

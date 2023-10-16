@@ -8,11 +8,12 @@ export default class TodoRouter {
   public static getRoutes(): Router {
     const router = Router({ mergeParams: true });
 
-    router.post('/', AccountAuthMiddleware.ensureAccess, TodoController.createTodo);
-    router.get('/', AccountAuthMiddleware.ensureAccess, TodoController.getAllTodos);
+    router.post('/create', AccountAuthMiddleware.ensureAccess, TodoController.createTodo);
+    router.get('/alltodos', AccountAuthMiddleware.ensureAccess, TodoController.getAllTodos);
     router.get('/:id', AccountAuthMiddleware.ensureAccess, TodoController.getTodo);
     router.delete('/:id', AccountAuthMiddleware.ensureAccess, TodoController.deleteTodo);
-    router.patch('/:id/update', AccountAuthMiddleware.ensureAccess, TodoController.updateTodo);
+    router.patch('/update/:id', AccountAuthMiddleware.ensureAccess, TodoController.updateTodo);
+    
     return router;
   }
 }

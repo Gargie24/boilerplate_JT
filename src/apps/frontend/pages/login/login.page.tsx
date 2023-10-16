@@ -1,5 +1,5 @@
-import React, { useCallback, useState,useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useCallback, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDeps } from '../../contexts';
 import './login.page.scss';
 
@@ -9,53 +9,87 @@ export default function Login(): React.ReactElement {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [usernameError, setUsernameError] = useState(''); // State variable for username error
+  const [passwordError, setPasswordError] = useState(''); // State variable for password error
   const navigation = useNavigate();
+
   useEffect(() => {
-    const user = localStorage.getItem("token");
+    const user = localStorage.getItem('token');
     if (user) {
-      return navigation("/");
+      return navigation('/');
     }
   }, []);
+
   const login = useCallback(async () => {
     setSuccess(false);
     setError(false);
+    setUsernameError(''); // Reset username error
+    setPasswordError(''); // Reset password error
 
     try {
-     const Object =  await accessService.login(username, password);
-     console.log(Object.data.token + " this is token");
-     localStorage.setItem("token", Object.data.token);
-     navigation('/');
+      const loginresult = await accessService.login(username, password);
+
+      const response = await accessService.generateAccessToken(
+        username,
+        password,
+      );
+
+      localStorage.setItem('accountId', `${loginresult.data.id}`);
+      localStorage.setItem('token', `${response.data.token}`);
+
+      alert('Your login is successful');
+      navigation(`/${loginresult.data.id}/todos`);
       setSuccess(true);
     } catch (err) {
       setError(true);
-    }
-  }, [
-    accessService,
-    username,
-    password,
-  ]
 
-  );
+      if (err.response) {
+        if (err.response.status === 401) {
+          // Set password error message for incorrect password
+          setPasswordError('Incorrect password. Please try again.');
+        } else if (err.response.status === 404) {
+          // Set username error message for non-existing username
+          setUsernameError('User does not exist. Enter a valid username.');
+        }
+      }
+    }
+  }, [accessService, username, password, navigation]);
 
   return (
-    <form>
-      {success ? <h2 id='success'>SUCCESS!</h2> : null}
-      {error ? <h2 id='error'>ERROR!</h2> : null}
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        id='username'
-        value={username}
-        type='text'
-      />
-      <input
-        onChange={(e) => setPassword(e.target.value)}
-        id='password'
-        value={password}
-        type='password'
-      />
-      <button type='button' onClick={login}>
+    <form className="form-container">
+      <h2>Login</h2>
+      {success ? <h2 id="success">SUCCESS!</h2> : null}
+      {error ? <h2 id="error">Login Error Please Try again!</h2> : null}
+
+      <div className="input-group">
+        <label htmlFor="username">Enter your username</label>
+        <input
+          onChange={(e) => setUsername(e.target.value)}
+          id="username"
+          value={username}
+          type="text"
+          placeholder="Username"
+        />
+        {/* Render the username error message */}
+        {usernameError && <div className="error-message">{usernameError}</div>}
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="password">Password</label>
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          id="password"
+          value={password}
+          type="password"
+          placeholder="Password"
+        />
+        {/* Render the password error message */}
+        {passwordError && <div className="error-message">{passwordError}</div>}
+      </div>
+
+      <button type="button" onClick={login}>
         LOGIN
       </button>
-    </form>
-  );
+      </form>);
+
 }

@@ -1,0 +1,6 @@
+// TodoItem.ts
+export interface TodoItem {
+  _id: string;
+  description: string;
+  // Add more fields as needed
+}

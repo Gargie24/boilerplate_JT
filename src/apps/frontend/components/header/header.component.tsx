@@ -13,11 +13,13 @@ export default function Header(): React.ReactElement {
 
   useEffect(() => {
     updateUserFromLocalStorage();
-  }, []);
+  }, [user]);
 
   const handleLogout = () => {
+    alert('logout');
     localStorage.clear();
     setUser(null);
+
     navigate('/login');
   };
 
@@ -40,7 +42,7 @@ export default function Header(): React.ReactElement {
               </Link>
             )}
             {user && (
-              <Link className="nav-link" onClick={handleLogout} to="#">
+              <Link className="nav-link" onClick={handleLogout} to="/login">
                 Logout
               </Link>
             )}

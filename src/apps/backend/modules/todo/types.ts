@@ -6,6 +6,7 @@ export class Todo {
   id: string;
   account: string;
   description: string;
+  isCompleted:Boolean;
 }
 
 export type GetAllTodoParams = {
@@ -19,10 +20,12 @@ export type GetTodoParams = {
   todoId: string;
 };
 export type updateTodoParams = {
-  accountId: string;
+
   todoId: string;
   newDesc : string;
 };
+
+
 export type CreateTodoParams = {
   accountId: string;
   description: string;

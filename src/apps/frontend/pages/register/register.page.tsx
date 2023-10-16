@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { useDeps } from '../../contexts';
+
 import './register.css';
+import { useNavigate } from 'react-router-dom';
+import { AccessService } from '../../services';
 
 export default function Registration(): React.ReactElement {
-  const { accessService } = useDeps();
+  const accessService = new AccessService();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +42,7 @@ export default function Registration(): React.ReactElement {
     // Validate password
     if (!validatePassword(password)) {
       setPasswordError(
-        'Password must contain at least one uppercase letter, one lowercase letter, one special symbol, and be at least 6 characters long.'
+        'Password must contain at least one uppercase letter, one lowercase letter, one special symbol, and be at least 6 characters long.',
       );
       return;
     }
@@ -51,51 +54,76 @@ export default function Registration(): React.ReactElement {
     }
 
     try {
-      const Object = await accessService.register(username, name, password, email);
-      console.log(Object.data.token + ' this is token');
-      localStorage.setItem('token', Object.data.token);
+      const result = await accessService.register(
+        username,
+        password,
+        name,
+        email,
+      );
+      console.log(result);
+
+      alert('Registration Sucessful');
+      navigate('/login');
       setSuccess(true);
     } catch (err) {
       setError(true);
     }
-  }, [accessService, username, name, password, email]);
+  }, [accessService, username, password, name, email]);
 
   return (
-    <form>
-      {success ? <h2 id='success'>Registration Successful!</h2> : null}
-      {error ? <h2 id='error'>Registration Error!</h2> : null}
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        id='username'
-        value={username}
-        type='text'
-        placeholder='Username'
-      />
-      {usernameError && <div className='error-message'>{usernameError}</div>}
-      <input
-        onChange={(e) => setName(e.target.value)}
-        id='name'
-        value={name}
-        type='text'
-        placeholder='Name'
-      />
-      <input
-        onChange={(e) => setPassword(e.target.value)}
-        id='password'
-        value={password}
-        type='password'
-        placeholder='Password'
-      />
-      {passwordError && <div className='error-message'>{passwordError}</div>}
-      <input
-        onChange={(e) => setEmail(e.target.value)}
-        id='email'
-        value={email}
-        type='email'
-        placeholder='Email'
-      />
-      {emailError && <div className='error-message'>{emailError}</div>}
-      <button type='button' onClick={register}>
+    <form className="form-container">
+      <h2>Registration</h2>
+      {success ? <h2 id="success">Registration Successful!</h2> : null}
+      {error ? <h2 id="error">Registration Error!</h2> : null}
+
+      <div className="input-group">
+        <label htmlFor="username">Enter your username</label>
+        <input
+          onChange={(e) => setUsername(e.target.value)}
+          id="username"
+          value={username}
+          type="text"
+          placeholder="Username"
+        />
+        {usernameError && <div className="error-message">{usernameError}</div>}
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="name">Enter your name</label>
+        <input
+          onChange={(e) => setName(e.target.value)}
+          id="name"
+          value={name}
+          type="text"
+          placeholder="Name"
+        />
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="password">Enter your password</label>
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          id="password"
+          value={password}
+          type="password"
+          placeholder="Password"
+        />
+        {passwordError && <div className="error-message">{passwordError}</div>}
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="email">Enter your email address</label>
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          id="email"
+          value={email}
+          type="email"
+          placeholder="Email"
+        />
+        {emailError && <div className="error-message">{emailError}</div>}
+      </div>
+
+      <button type="button" onClick={register}>
         REGISTER
       </button>
     </form>

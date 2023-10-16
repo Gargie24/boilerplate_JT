@@ -21,7 +21,7 @@ export default class TodoService {
 
 
   public static async updateTodo(params: updateTodoParams): Promise<Todo> {
-    
+
     return TodoWriter.updateTodo(params);
   }
 
@@ -32,5 +32,9 @@ export default class TodoService {
   public static async getTodosForAccount(params: GetAllTodoParams): Promise<Todo[]> {
     return TodoReader.getTodosForAccount(params);
   }
+
+
+
+
 
 }

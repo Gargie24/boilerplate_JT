@@ -18,7 +18,7 @@ export default class AccountController {
       const account = await AccountService.createAccount(params);
       console.log('[INFO] Account created:', account);
 
-      res.status(201).send({message: 'Registration successful',account:AccountController.serializeAccountAsJSON(account)});
+      res.status(201).send(AccountController.serializeAccountAsJSON(account));
     } catch (e) {
       console.error('[ERROR] An error occurred during account creation:', e);
       next(e);
@@ -42,17 +42,12 @@ export default class AccountController {
 
 
       // Perform authentication, e.g., check credentials against a database
-      const isAuthenticated = await AccountService.AuhenticateAccount(params);
+      const account = await AccountService.getAccountByUsernamePassword(params);
 
-      if (isAuthenticated) {
-        // Authentication successful, you can generate a token or session here if needed
-        res.status(200).json({ message: 'Login successful' });
-      } else {
-        // Authentication failed
-        res.status(401).json({ message: 'Login failed. Invalid credentials.' });
-      }
+      res.status(200).send(AccountController.serializeAccountAsJSON(account));
+
     } catch (e) {
-      console.error('[ERROR] An error occurred during login:', e);
+
       next(e);
     }
   }

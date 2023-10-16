@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
-import { Footer,Header } from './components';
+import { Footer } from './components';
 import { DepsProvider } from './contexts';
 import { Config } from './helpers';
 import { About,Login,Register,Home} from './pages';
@@ -22,13 +22,14 @@ export default function App(): React.ReactElement {
   return (
     <DepsProvider deps={{
       accessService: new AccessService(),
-    }}>
+     }}>
       <Router>
-      <Header/>
+
         <div className='container'>
 
           <Routes>
-            <Route path = '/' element={<div style={{ marginTop: '40px' }}><Home /></div>}> </Route>
+          <Route path = '/' element={<div style={{ marginTop: '40px' }}><Home/></div>}> </Route>
+            <Route path = '/:_id/todos' element={<div style={{ marginTop: '40px' }}><Home/></div>}> </Route>
             <Route path='/about' element={<About />} />
 
              <Route path='/login' element={<Login />} />
@@ -39,7 +40,7 @@ export default function App(): React.ReactElement {
           <Footer />
         </div>
       </Router>
-    </DepsProvider>
+     </DepsProvider>
   );
 }
 
