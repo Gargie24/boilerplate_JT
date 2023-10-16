@@ -7,6 +7,7 @@ export interface TodoDB {
   account: Types.ObjectId;
   active: boolean;
   description: string;
+  isCompleted:boolean;
 }
 
 export const todoDbSchema: Schema = new Schema<TodoDB>(
@@ -20,6 +21,11 @@ export const todoDbSchema: Schema = new Schema<TodoDB>(
     },
     description: {
       type: String,
+      required: true,
+    },
+    isCompleted: {
+      type: Boolean,
+      default: false,
       required: true,
     },
   },

@@ -13,7 +13,7 @@ export default class TodoRouter {
     router.get('/:id', AccountAuthMiddleware.ensureAccess, TodoController.getTodo);
     router.delete('/:id', AccountAuthMiddleware.ensureAccess, TodoController.deleteTodo);
     router.patch('/update/:id', AccountAuthMiddleware.ensureAccess, TodoController.updateTodo);
-    
+    router.patch('/mark/:id',AccountAuthMiddleware.ensureAccess, TodoController.MarkTodo);
     return router;
   }
 }

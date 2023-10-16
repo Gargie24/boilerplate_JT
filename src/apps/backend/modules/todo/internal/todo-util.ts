@@ -12,6 +12,7 @@ if (!todoDb) {
     todo.id = todoDb._id.toString();
     todo.account = todoDb.account.toString();
     todo.description = todoDb.description;
+    todo.isCompleted = todoDb.isCompleted;
     return todo;
   }
 }

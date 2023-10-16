@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDeps } from '../../contexts';
+
 import './login.page.scss';
+import { AccessService } from '../../services';
 
 export default function Login(): React.ReactElement {
-  const { accessService } = useDeps();
+ const  accessService = new AccessService();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);

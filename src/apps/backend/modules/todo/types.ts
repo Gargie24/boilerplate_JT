@@ -19,6 +19,10 @@ export type GetTodoParams = {
   accountId: string;
   todoId: string;
 };
+export type MarkTodoParams = {
+  
+  todoId:string;
+}
 export type updateTodoParams = {
 
   todoId: string;

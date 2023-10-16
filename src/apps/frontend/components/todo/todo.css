@@ -5,17 +5,18 @@
     background-color: #fff;
     border: 1px solid #ccc;
     padding: 15px;
-    margin: 10px;
+    margin: 10px auto; /* Center the container horizontally */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 70%; /* Set a maximum width to prevent it from covering the whole width */
   }
 
   /* Style the description text */
   .todo-description {
-    font-size: 23px;
+    font-size: 26px;
     flex: 1;
     padding: 10px; /* Add some padding to make the text stand out */
   }
@@ -36,3 +37,25 @@
   .delete-icon {
     color: #e74c3c; /* Red color for delete icon */
   }
+
+  /* todo.css */
+
+/* Style for the "mark completed" icon button */
+/* todo.css */
+
+/* Default style for the "mark completed" icon button (grey) */
+.icon-button.mark-completed-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ccc; /* Grey color for the default state */
+    font-size: 20px; /* Adjust the font size as needed */
+    margin-right: 5px; /* Add margin between icons */
+  }
+
+  /* Active style for the "mark completed" icon button (green) */
+  .icon-button.mark-completed-icon.active {
+    color: #27ae60; /* Green color for the active (clicked) state */
+  }
+
+

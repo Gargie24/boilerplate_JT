@@ -9,7 +9,8 @@ import {
   DeleteTodoParams,
   updateTodoParams,
   GetTodoParams,
-  
+  MarkTodoParams,
+
 } from '../types';
 
 export default class TodoController {
@@ -113,6 +114,35 @@ export default class TodoController {
     } catch (e) {
       next(e);
     }
+  }
+    //mark todo controller
+
+    public static async MarkTodo(
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ): Promise<void> {
+      try {
+        // Extract the required parameters from the request
+
+        const params: MarkTodoParams = {
+          todoId: req.params.id,
+
+        };
+        console.log(params.todoId);
+        // const accountId: string = req.params.accountId;
+        // const todoId: string = req.params.id;
+        //const updateData: updateTodoParams = req.body as updateTodoParams; // Assuming UpdateTodoParams contains the fields to update
+
+        // Call your TodoService to perform the update
+
+        const MarkTodo: Todo = await TodoService.MarkTodo(params);
+
+        // Send a response with the updated todo
+        res.status(200).send(TodoController.serializeTodoAsJSON(MarkTodo));
+      } catch (e) {
+        next(e);
+      }
   }
 
 

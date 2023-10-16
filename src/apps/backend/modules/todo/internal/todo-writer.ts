@@ -4,6 +4,7 @@ import {
   CreateTodoParams,
   DeleteTodoParams,
   updateTodoParams,
+  MarkTodoParams,
   Todo,
 } from '../types';
 import TodoRepository from './store/todo-repository';
@@ -14,6 +15,7 @@ export default class TodoWriter {
     const createdTodo = await TodoRepository.TodoDB.create({
       account: params.accountId,
       description: params.description,
+      isCompleted:false,
       active: true,
     });
     return TodoUtil.convertTodoDBToTodo(createdTodo);
@@ -55,5 +57,30 @@ export default class TodoWriter {
     }
 
     return TodoUtil.convertTodoDBToTodo(UpdatedTodo);
+  }
+
+  //mark todo
+
+  public static async MarkTodo(params: MarkTodoParams): Promise<Todo> {
+    const markTodo = await TodoRepository.TodoDB.findOneAndUpdate(
+      {
+        _id: params.todoId,
+
+      },
+      {
+        $set: {
+          isCompleted : true,
+
+        },
+      },
+      {
+        new: true, // To return the updated document
+      },
+    );
+    if (!markTodo) {
+      console.log('todo is not found');
+    }
+
+    return TodoUtil.convertTodoDBToTodo(markTodo);
   }
 }

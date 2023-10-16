@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
-import { Footer } from './components';
-import { DepsProvider } from './contexts';
+
+// import { DepsProvider } from './contexts';
 import { Config } from './helpers';
 import { About,Login,Register,Home} from './pages';
-import { AccessService } from './services';
+// import { AccessService } from './services';
 import InspectLet from './vendor/inspectlet';
 
 import './app.global.scss';
@@ -20,9 +20,9 @@ export default function App(): React.ReactElement {
   }, []);
 
   return (
-    <DepsProvider deps={{
-      accessService: new AccessService(),
-     }}>
+    // <DepsProvider deps={{
+    //   accessService: new AccessService(),
+    //  }}>
       <Router>
 
         <div className='container'>
@@ -37,10 +37,10 @@ export default function App(): React.ReactElement {
             <Route path='/register' element={<Register/>} />
 
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
-     </DepsProvider>
+    //  </DepsProvider>
   );
 }
 

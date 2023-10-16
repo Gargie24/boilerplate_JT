@@ -6,13 +6,15 @@ import './home.css';
 interface TodoItem {
   id: string;
   description: string;
-
+  isCompleted:boolean;
 }
 
 export default function Home() {
   const todoService = new TodoService();
   const [loggedIn, setLoggedIn] = useState(false);
   const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [showCompleted, setShowCompleted] = useState(false);
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -50,7 +52,7 @@ export default function Home() {
   };
 
   const handleUpdateTodo = (todoId: string, newDescription: string) => {
-    console.log(todoId);
+
     todoService
       .updateTodo(todoId, newDescription)
       .then(() => {
@@ -58,6 +60,7 @@ export default function Home() {
           todo.id === todoId ? { ...todo, description: newDescription } : todo,
         );
         setTodos(updatedTodos);
+        alert("todo updated")
       })
       .catch((error) => {
         console.error('Error updating todo:', error);
@@ -65,25 +68,44 @@ export default function Home() {
   };
 
   const handleDeleteTodo = (todoId: string) => {
+
     todoService
       .deleteTodo(todoId)
       .then(() => {
         const updatedTodos = todos.filter((todo) => todo.id !== todoId);
         setTodos(updatedTodos);
+        alert("todo deleted");
       })
       .catch((error) => {
         console.error('Error deleting todo:', error);
       });
   };
 
+
+  const handleMarkCompleted = (todoId: string) => {
+    todoService
+      .MarkTodo(todoId)
+      .then(() => {
+        const updatedTodos = todos.map((todo) =>
+          todo.id === todoId ? { ...todo, isCompleted: true } : todo
+        );
+        setTodos(updatedTodos);
+        alert('Hurray!! Todo Completed');
+      })
+      .catch((error) => {
+        console.error('Error marking todo as completed:', error);
+      });
+  };
+  const incompleteTodos = todos.filter((todo) => !todo.isCompleted);
+  const completedTodos = todos.filter((todo) => todo.isCompleted);
+
   return (
     <div>
       <Header />
       <div className="container">
         {
-          !loggedIn &&
-        <h1>Welcome to Todo Application</h1>
-}
+          !loggedIn && <h1>Welcome to Todo Application</h1>
+        }
         {loggedIn ? (
           <div>
             <button
@@ -97,18 +119,45 @@ export default function Home() {
             >
               Add Todo
             </button>
+
+            <button
+              className="btn toggle-button"
+              onClick={() => setShowCompleted(!showCompleted)} // Toggle completed todos visibility
+            >
+              {showCompleted ? 'Hide Completed' : 'Show Completed'}
+            </button>
+
             <div className="todo-list">
-              {todos.map((todo) => (
+              <h2>Todos</h2>
+              {incompleteTodos.map((todo) => (
                 <Todo
                   key={todo.id}
                   todoId={todo.id}
                   description={todo.description}
-                 
+                  isCompleted={todo.isCompleted}
                   onUpdate={handleUpdateTodo}
+                  onMarkCompleted={handleMarkCompleted}
                   onDelete={handleDeleteTodo}
                 />
               ))}
             </div>
+
+            {showCompleted && (
+              <div className="todo-list">
+                <h2> Well done!!! Your Completed Todos</h2>
+                {completedTodos.map((todo) => (
+                  <Todo
+                    key={todo.id}
+                    todoId={todo.id}
+                    description={todo.description}
+                    isCompleted={todo.isCompleted}
+                    onUpdate={handleUpdateTodo}
+                    onMarkCompleted={handleMarkCompleted}
+                    onDelete={handleDeleteTodo}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         ) : (
           <div>
@@ -121,3 +170,9 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
+
+

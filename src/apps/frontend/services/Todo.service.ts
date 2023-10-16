@@ -57,21 +57,25 @@ updateTodo(todoId: string, description: string) {
     { headers },
   );
 }
-markTodo(todoId: string) {
-  console.log('updated todo started');
+
+//mark todo
+MarkTodo(todoId: string) {
+  console.log("mark todo clicked");
   const token = localStorage.getItem('token');
   console.log(token);
   const accountId = localStorage.getItem('accountId');
+  console.log(accountId);
   const headers = {
     // Adjust headers as needed
-    authorization: `Bearer ${token}`,
+    authorization: `Bearer ${token}`, // Example: Bearer token for authentication
   };
 
   return this.apiClient.patch(
     `${accountId}/todos/mark/${todoId}`,
-
+     null,
     { headers },
   );
+
 }
 
 //delete todo

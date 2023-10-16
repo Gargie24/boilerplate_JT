@@ -10,8 +10,26 @@
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 10%;
 }
 
 .add-todo-button:hover {
   background-color: darkgreen;
+}
+/* todo.css */
+
+/* Add styles for completed todo */
+.todo-item.completed {
+  opacity: 0.5;
+}
+
+/* Modify styles for the mark completed button */
+.mark-completed-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mark-completed-icon.active {
+  color: green; /* Change color for active (completed) state */
 }

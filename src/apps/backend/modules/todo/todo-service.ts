@@ -7,7 +7,8 @@ import {
   DeleteTodoParams,
   GetAllTodoParams,
   GetTodoParams,
-  Todo,updateTodoParams
+  Todo,updateTodoParams,
+  MarkTodoParams
 } from './types';
 
 export default class TodoService {
@@ -32,6 +33,13 @@ export default class TodoService {
   public static async getTodosForAccount(params: GetAllTodoParams): Promise<Todo[]> {
     return TodoReader.getTodosForAccount(params);
   }
+
+
+  public static async MarkTodo(params:MarkTodoParams): Promise<Todo> {
+
+    return TodoWriter.MarkTodo(params);
+  }
+
 
 
 
