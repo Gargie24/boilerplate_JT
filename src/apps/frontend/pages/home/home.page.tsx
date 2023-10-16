@@ -162,7 +162,7 @@ export default function Home() {
         ) : (
           <div>
             <h2 style={{ marginTop: '10px' }}>
-              Please Login or Register if you are new
+              Please Login or Register to continue
             </h2>
           </div>
         )}

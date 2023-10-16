@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import './register.css';
 import { useNavigate } from 'react-router-dom';
 import { AccessService } from '../../services';
@@ -126,6 +126,10 @@ export default function Registration(): React.ReactElement {
       <button type="button" onClick={register}>
         REGISTER
       </button>
+      <p>
+        Already have an account?{' '}
+        <Link to="/login">Login here</Link>
+      </p>
     </form>
   );
 }

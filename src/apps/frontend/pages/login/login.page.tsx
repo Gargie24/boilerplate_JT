@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './login.page.scss';
 import { AccessService } from '../../services';
@@ -91,6 +92,12 @@ export default function Login(): React.ReactElement {
       <button type="button" onClick={login}>
         LOGIN
       </button>
-      </form>);
+
+      <p> don't have a account register here
+        {''}
+      <Link to="/register">Register here</Link>
+
+      </p>
+            </form>);
 
 }

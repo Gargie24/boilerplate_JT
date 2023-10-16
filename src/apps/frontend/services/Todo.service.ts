@@ -1,100 +1,85 @@
 import APIService from './api.service';
 
 export default class AccessService extends APIService {
+  CreateTodo(description: String): Promise<any> {
+    const token = localStorage.getItem('token');
 
+    const accountId = localStorage.getItem('accountId');
 
+    const headers = {
+      // Adjust headers as needed
+      authorization: `Bearer ${token}`,
+    };
 
-CreateTodo(description: String): Promise<any> {
-  const token = localStorage.getItem('token');
-  console.log("add todo started");
-  console.log("token ", token)
+    return this.apiClient.post(
+      `${accountId}/todos/create`,
+      { description },
+      { headers },
+    );
+  }
 
-  const accountId = localStorage.getItem('accountId');
-  console.log("accont id is this ", accountId);
-  const headers = {
-    // Adjust headers as needed
-    authorization: `Bearer ${token}`,
-  };
+  getAllTodos(): Promise<any> {
+    const token = localStorage.getItem('token');
 
-  return this.apiClient.post(
-    `${accountId}/todos/create`,
-    { description },
-    { headers },
-  );
-}
+    const accountID = localStorage.getItem('accountId');
 
-getAllTodos(): Promise<any> {
-  console.log('i am at getalltodos api call first line');
-  const token = localStorage.getItem('token');
-  console.log(token);
+    const headers = {
+      // Adjust headers as needed
+      authorization: `Bearer ${token}`,
+    };
 
-  const accountID = localStorage.getItem('accountId');
-  console.log(accountID);
-  const headers = {
-    // Adjust headers as needed
-    authorization: `Bearer ${token}`,
-  };
+    return this.apiClient.get(
+      `${accountID}/todos/alltodos`,
 
-  return this.apiClient.get(
-    `${accountID}/todos/alltodos`,
+      { headers },
+    );
+  }
+  updateTodo(todoId: string, description: string) {
+    const token = localStorage.getItem('token');
 
-    { headers },
-  );
-}
-updateTodo(todoId: string, description: string) {
-  console.log('updated todo started');
-  const token = localStorage.getItem('token');
-  console.log(token);
-  const accountId = localStorage.getItem('accountId');
-  const headers = {
+    const accountId = localStorage.getItem('accountId');
+    const headers = {
+      authorization: `Bearer ${token}`,
+    };
 
-    authorization: `Bearer ${token}`,
-  };
+    return this.apiClient.patch(
+      `${accountId}/todos/update/${todoId}`,
+      { description },
+      { headers },
+    );
+  }
 
-  return this.apiClient.patch(
-    `${accountId}/todos/update/${todoId}`,
-    { description },
-    { headers },
-  );
-}
+  //mark todo
+  MarkTodo(todoId: string) {
+    const token = localStorage.getItem('token');
 
-//mark todo
-MarkTodo(todoId: string) {
-  console.log("mark todo clicked");
-  const token = localStorage.getItem('token');
-  console.log(token);
-  const accountId = localStorage.getItem('accountId');
-  console.log(accountId);
-  const headers = {
-    // Adjust headers as needed
-    authorization: `Bearer ${token}`, // Example: Bearer token for authentication
-  };
+    const accountId = localStorage.getItem('accountId');
 
-  return this.apiClient.patch(
-    `${accountId}/todos/mark/${todoId}`,
-     null,
-    { headers },
-  );
+    const headers = {
+      // Adjust headers as needed
+      authorization: `Bearer ${token}`, // Example: Bearer token for authentication
+    };
 
-}
+    return this.apiClient.patch(`${accountId}/todos/mark/${todoId}`, null, {
+      headers,
+    });
+  }
 
-//delete todo
+  //delete todo
 
-deleteTodo(todoId: string) {
-  console.log('updated todo started');
-  const token = localStorage.getItem('token');
-  console.log(token);
-  const accountId = localStorage.getItem('accountId');
-  const headers = {
-    // Adjust headers as needed
-    authorization: `Bearer ${token}`, // Example: Bearer token for authentication
-  };
+  deleteTodo(todoId: string) {
+    const token = localStorage.getItem('token');
 
-  return this.apiClient.delete(
-    `${accountId}/todos/${todoId}`,
+    const accountId = localStorage.getItem('accountId');
+    const headers = {
+      // Adjust headers as needed
+      authorization: `Bearer ${token}`, // Example: Bearer token for authentication
+    };
 
-    { headers },
-  );
-}
+    return this.apiClient.delete(
+      `${accountId}/todos/${todoId}`,
 
+      { headers },
+    );
+  }
 }
